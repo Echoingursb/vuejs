@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08_表单输入绑定</title>
+</head>
+<body>
+<!--
+1. 使用v-model(双向数据绑定)自动收集数据
+  text/textarea
+  checkbox
+  radio
+  select
+-->
+<div id="demo">
+    <form action="/xxx" @submit.prevent="handleSubmit">
+        <label>
+            <span>用户名: </span>
+            <input type="text" v-model="username">
+        </label>
+        <br/>
+        <label>
+            <span>密码: </span>
+            <input type="password" v-model="pwd">
+        </label>
+        <br/>
+        <span>性别: </span>
+        <label>
+            <input type="radio" value="female" v-model="sex">女
+        </label>
+        <label>
+            <input type="radio" value="male" v-model="sex">男
+        </label>
+        <br/>
+        <span>爱好: </span>
+        <label>
+            <input type="checkbox" value="basketball" v-model="likes">
+            篮球
+        </label>
+        <label>
+            <input type="checkbox" value="football" v-model="likes">
+            足球
+        </label>
+        <label>
+            <input type="checkbox" value="pingpang" v-model="likes">
+            乒乓球
+        </label>
+        <br/>
+        <label>
+            <span>城市: </span>
+            <select v-model="cityId">
+                <option value="">未选择</option>
+                <option v-for="city in cities" :key="city.cityId" :value="city.cityId">{{city.cityName}}</option>
+            </select>
+        </label>
+        <br>
+        <label>
+            <span>介绍: </span>
+            <textarea rows="10" v-model="desc"></textarea>
+        </label>
+        <br/>
+        <br/>
+        <input type="submit" value="注册">
+    </form>
+</div>
+
+<script type="text/javascript" src="../vue2.5.17.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#demo',
+        data: {
+            username: '',
+            pwd: '',
+            sex: '',
+            likes: [],
+            cities: [
+                {cityId: 1, cityName: '北京', cityCode: 'beijing'},
+                {cityId: 2, cityName: '南京', cityCode: 'nanjing'},
+                {cityId: 3, cityName: '上海', cityCode: 'shanghai'}
+            ],
+            cityId: '',
+            desc: ''
+        },
+        methods: {
+            handleSubmit() {
+                console.log(this.cityId);
+            }
+        }
+    })
+</script>
+</body>
+</html>

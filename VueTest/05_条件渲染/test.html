@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue2.5.17.js"></script>
+</head>
+<body>
+<!--
+1. 条件渲染指令
+  v-if
+  v-else
+  v-show
+2. 比较v-if与v-show
+  如果需要频繁切换 v-show 较好
+-->
+<div id="demo">
+    <p v-if="ok">成功！</p>
+    <p v-else>失败！</p>
+    <hr/>
+    <p v-show="ok">成功！</p>
+    <p v-show="!ok">失败</p>
+    <button @click="toggle">切换</button>
+</div>
+<script>
+    'use strict';
+    const vm = new Vue({
+        el: '#demo',
+        data: {
+            ok: true
+        },
+        methods: {
+            toggle: function () {
+                this.ok = !this.ok;
+            }
+        }
+    })
+</script>
+</body>
+</html>

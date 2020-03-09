@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo">
+    <p>{{person.name}}</p>
+</div>
+<script src="mvvm-master/js/compile.js"></script>
+<script src="mvvm-master/js/mvvm.js"></script>
+<script src="mvvm-master/js/observer.js"></script>
+<script src="mvvm-master/js/watcher.js"></script>
+<script>
+    'use strict';
+    new MVVM({
+        el: '#demo',
+        data: {
+            name: 'pubg mobile',
+            person: {
+                name: '张三'
+            }
+        }
+    });
+</script>
+</body>
+</html>
