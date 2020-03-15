@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+  1. 数据绑定(包含两个方向)
+    * 初始化显示: 页面(表达式/指令)能从data读取数据显示 (编译/解析)
+    * 更新显示: 更新data中的属性数据==>页面更新
+-->
+<div id="demo">
+    <p>{{name}}</p> <!--w0===d0-->
+    <p v-text="name"></p> <!--w1===d0-->
+    <!--<p v-text="name"></p>-->
+    <p v-text="wife.name"></p> <!--w2==={d1,d2}-->
+    <button v-on:click="update">更新</button>
+    <!--d0===[w0,w1]-->
+    <!--d1===[w2]-->
+    <!--d2===[w2]-->
+</div>
+<script src="mvvm-master/js/compile.js"></script>
+<script src="mvvm-master/js/mvvm.js"></script>
+<script src="mvvm-master/js/observer.js"></script>
+<script src="mvvm-master/js/watcher.js"></script>
+<script>
+    new MVVM({
+        el: '#demo',
+        data: {
+            name: 'alice',
+            wife: {
+                name: 'white',
+                age: 28
+            }
+        },
+        methods: {
+            update() {
+                this.name = 'bob';
+                this.wife.name = 'black'
+            }
+        }
+    });
+</script>
+</body>
+</html>

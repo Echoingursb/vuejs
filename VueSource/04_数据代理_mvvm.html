@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo">{{name}}</div>
+<script src="mvvm-master/js/compile.js"></script>
+<script src="mvvm-master/js/mvvm.js"></script>
+<script src="mvvm-master/js/observer.js"></script>
+<script src="mvvm-master/js/watcher.js"></script>
+<script>
+    'use strict';
+    const vm = new MVVM({
+        el: '#demo',
+        data: {
+            name: '张三'
+        }
+    });
+    console.log(vm.name, vm);
+    vm.name = '李四';
+    console.log(vm.name);
+</script>
+</body>
+</html>

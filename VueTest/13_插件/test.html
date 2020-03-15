@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo">
+    <p v-my-directive="msg"></p>
+</div>
+
+<script type="text/javascript" src="../vue2.5.17.js"></script>
+<script type="text/javascript" src="vue-myPlugin.js"></script>
+<script>
+    'use strict';
+    // 声明使用插件
+    Vue.use(MyPlugin); // 内部会调用MyPlugin.install(Vue)
+    Vue.myGlobalMethod();
+    var vm = new Vue({
+        el: '#demo',
+        data: {
+            msg: 'Vue Js'
+        }
+
+    });
+    vm.$myMethod();
+</script>
+</body>
+</html>

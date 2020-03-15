@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .aClass {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <p v-text="msg"></p>
+    <p v-html="msg"></p>
+    <p v-class="myClass">pubg mobile</p>
+</div>
+<script src="mvvm-master/js/compile.js"></script>
+<script src="mvvm-master/js/mvvm.js"></script>
+<script src="mvvm-master/js/observer.js"></script>
+<script src="mvvm-master/js/watcher.js"></script>
+<script>
+    new MVVM({
+        el: '#demo',
+        data: {
+            msg: '<a href="http://www.baidu.com">百度</a>',
+            myClass: 'aClass'
+        }
+    });
+</script>
+</body>
+</html>

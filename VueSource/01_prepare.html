@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test">pineapple</div>
+<ul id="fragment_test">
+    <li>test1</li>
+    <li>test2</li>
+    <li>test3</li>
+</ul>
+<script>
+    'use strict';
+    // 1. [].slice.call(lis): 将伪数组转换为真数组
+    let lis = document.getElementsByTagName('li');
+    console.log(lis instanceof Object, lis instanceof Array, lis[1].innerHTML, lis.forEach);
+    // es5
+    let lis1 = Array.prototype.slice.call(lis);
+    console.log(lis1 instanceof Array);
+    let lis2 = [].slice.call(lis);
+    console.log(lis2 instanceof Array);
+    // es6
+    let lis3 = Array.from(lis);
+    console.log(lis3 instanceof Array);
+    let lis4 = [...lis];
+    console.log(lis4 instanceof Array);
+
+    // 2. node.nodeType: 得到节点类型
+    let elementNode = document.getElementById('test');
+    let attrNode = elementNode.getAttributeNode('id');
+    let textNode = elementNode.firstChild;
+    console.log(elementNode.nodeType, attrNode.nodeType, textNode.nodeType);
+
+    // 3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+    const obj = {
+        firstName: 'A',
+        lastName: 'B'
+    };
+    Object.defineProperty(obj, 'fullName', {
+        get() { // 回调函数，根据其他相关的属性值动态计算得到当前属性值
+            return this.firstName + "-" + this.lastName;
+        },
+        set(val) { // 回调函数，监视当前属性值的变化，更新其他相关的属性值
+            const names = val.split('-');
+            console.log(names);
+            this.firstName = names[0];
+            this.lastName = names[1];
+        }
+    });
+    console.log(Object.keys(obj));
+    console.log(obj.fullName);
+    obj.firstName = 'C';
+    obj.lastName = 'D';
+    console.log(obj.fullName);
+    obj.fullName = 'E-F';
+    // console.log(obj.firstName, obj.lastName);
+
+    // 4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+    let objProps = Object.keys(obj);
+    console.log(objProps);
+
+    // 5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+    console.log(obj.hasOwnProperty('fullName'), obj.hasOwnProperty('toString'));
+
+    // 6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+    /*
+    <ul id="fragment_test">
+        <li>test1</li>
+        <li>test2</li>
+        <li>test3</li>
+    </ul>
+     */
+    let ul = document.getElementById('fragment_test');
+    let fragment = document.createDocumentFragment();
+    let child;
+    while ( child = ul.firstChild) {
+        fragment.appendChild(child) // 先将child从ul中移除，添加为fragment的子节点
+    }
+    Array.prototype.slice.call(fragment.childNodes).forEach(node => {
+        if (node.nodeType === 1) {
+            node.textContent = 'hello'
+        }
+    });
+    ul.appendChild(fragment);
+
+</script>
+</body>
+</html>
